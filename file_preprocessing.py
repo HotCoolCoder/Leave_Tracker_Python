@@ -46,6 +46,8 @@ def file_preprocessing(df:pd.DataFrame)->pd.DataFrame:
     df['Absent_count'] = (df[date_columns] == 'PL').sum(axis=1) + (df[date_columns] == 'UL').sum(axis=1) + (df[date_columns] == 'SL').sum(axis=1)
     df['Public_holidays'] = (df[date_columns] == 'PH').sum(axis=1)
     df['Other_holidays'] = (df[date_columns] == 'Travelling to India').sum(axis=1)
-    #print(df)
+    df['Absent_date']=df[date_columns].applymap(lambda x: 'PL' in x).dot(df[date_columns].columns + ',').str[:-1] + ',' + df[date_columns].applymap(lambda x: 'UL' in x).dot(df[date_columns].columns + ',').str[:-1] + df[date_columns].applymap(lambda x: 'SL' in x).dot(df[date_columns].columns + ',').str[:-1]
+    df['Absent_date']=df['Absent_date'].str.lstrip(',')
+    df['Absent_date']=df['Absent_date'].str.rstrip(',')
     df.to_excel(r'C:\Users\Paritosh.Sharma\Downloads\df1_file.xlsx',index=False)
     return df
