@@ -3,8 +3,8 @@ import pandas as pd
 def file_preprocessing(df:pd.DataFrame)->pd.DataFrame:
     # df=dataframe_creation()
     col_list=['Emp_Id','Emp_name','BD_1','BD_2','BD_3','BD_4','BD_5','BD_6','BD_7','BD_8','BD_9','BD_10',
-         'BD_11','BD_12','BD_13','BD_14','BD_15','BD_16','BD_17','BD_18','BD_19','BD_20','BD_21','BD_22','BD_23','BD_24',
-          'BD_25','BD_26','BD_27','BD_28','BD_29','BD_30','BD_31']  #To match with DB Schema
+        'BD_11','BD_12','BD_13','BD_14','BD_15','BD_16','BD_17','BD_18','BD_19','BD_20','BD_21','BD_22','BD_23','BD_24',
+        'BD_25','BD_26','BD_27','BD_28','BD_29','BD_30','BD_31']  #To match with DB Schema
     push_db=pd.DataFrame(columns=col_list)       #temp df
     df.drop(['S.No.','Unnamed: 3'],axis=1,inplace=True)
     l1=df.columns.tolist() #to store the column names in a list
@@ -49,5 +49,5 @@ def file_preprocessing(df:pd.DataFrame)->pd.DataFrame:
     df['Absent_date']=df[date_columns].applymap(lambda x: 'PL' in x).dot(df[date_columns].columns + ',').str[:-1] + ',' + df[date_columns].applymap(lambda x: 'UL' in x).dot(df[date_columns].columns + ',').str[:-1] + df[date_columns].applymap(lambda x: 'SL' in x).dot(df[date_columns].columns + ',').str[:-1]
     df['Absent_date']=df['Absent_date'].str.lstrip(',')
     df['Absent_date']=df['Absent_date'].str.rstrip(',')
-    df.to_excel(r'C:\Users\Paritosh.Sharma\Downloads\df1_file.xlsx',index=False)
+    df.to_excel(r'C:\Users\Admin\Downloads\df1_file.xlsx',index=False)
     return df

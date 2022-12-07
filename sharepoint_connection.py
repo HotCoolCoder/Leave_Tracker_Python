@@ -6,7 +6,6 @@ import pandas as pd
  
  
  
- 
  # try:
         #     data_added = df.to_sql('TestAPLNavIDs', con=engine , if_exists = 'append' , index = False) 
         #     if data_added==0:
@@ -83,8 +82,10 @@ def create_connection():    #
 #import json 
 def get_sharepoint_connection():
     SPUrl = "https://assetmark-my.sharepoint.com"
-    username ="Praveen.Singh@assetmark.com"
-    password ="Welcome208435!" 
+    # username ="Praveen.Singh@assetmark.com"
+    # password ="Welcome208435!" 
+    username = "Paritosh.Sharma@assetmark.com"
+    password = "Welcome208319!"
 
     conn = sharepy.connect(SPUrl,username,password)
     return conn

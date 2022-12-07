@@ -15,5 +15,5 @@ def download_sharepoint_file(conn):
     }
     site = "https://assetmark-my.sharepoint.com/:x:/r/personal/rishi_bhadoria_assetmark_com/Documents/Documents/AM_2022/QA%20Transition/QA_Leave_Tracker_2022.xlsx"
     
-    local_file_path=r'C:\Users\Paritosh.Sharma\Downloads\test_file.xlsx'
+    local_file_path=r'C:\Users\Admin\Downloads\test_file.xlsx'
     response = conn.getfile(site,headers = my_headers,filename = local_file_path)
