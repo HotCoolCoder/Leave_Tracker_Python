@@ -34,15 +34,15 @@ def file_preprocessing(df:pd.DataFrame)->pd.DataFrame:
     month_name='NOV'    #month of script run
     year='2022'  #year of script run
     df=df.assign(Month=[month_name]*len(df.index), Year=[year]*len(df.index),Location=l3)
-    df.replace('.0','',inplace=True)
-    df.replace('Working from Mexico','Y',inplace=True)  #handle PH of India but working day for Mexico
+    df = df.astype(str).replace(r'\.0$', '', regex=True)
+    # df.replace('Working from Mexico','Y',inplace=True)  #handle PH of India but working day for Mexico
     # Date columns
     date_columns=['BD_1','BD_2','BD_3','BD_4','BD_5','BD_6','BD_7','BD_8','BD_9','BD_10',
          'BD_11','BD_12','BD_13','BD_14','BD_15','BD_16','BD_17','BD_18','BD_19','BD_20','BD_21','BD_22','BD_23','BD_24',
           'BD_25','BD_26','BD_27','BD_28','BD_29','BD_30','BD_31']
     
     #calculation of present and absent of a resource in a month
-    df['Present_count'] = (df[date_columns] == 'Y').sum(axis=1)              
+    df['Present_count'] = (df[date_columns] == 'Y').sum(axis=1) + (df[date_columns] == 'Working from Mexico').sum(axis=1)             
     df['Absent_count'] = (df[date_columns] == 'PL').sum(axis=1) + (df[date_columns] == 'UL').sum(axis=1) + (df[date_columns] == 'SL').sum(axis=1)
     df['Public_holidays'] = (df[date_columns] == 'PH').sum(axis=1)
     df['Other_holidays'] = (df[date_columns] == 'Travelling to India').sum(axis=1)
