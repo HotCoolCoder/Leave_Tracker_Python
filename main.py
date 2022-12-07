@@ -1,0 +1,9 @@
+import download_file,sharepoint_connection,file_preprocessing,read_file_and_create_dict_of_dfs,Bulk_insert
+
+import toolz
+
+download_file.download_sharepoint_file(sharepoint_connection.get_sharepoint_connection())
+
+dict_processed_dfs = toolz.valmap(file_preprocessing.file_preprocessing(), read_file_and_create_dict_of_dfs.read_file_and_create_dict_of_dfs())
+
+toolz.valmap(Bulk_insert.bulk_insert(),dict_processed_dfs)
