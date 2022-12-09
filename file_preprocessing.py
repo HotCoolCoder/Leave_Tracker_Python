@@ -1,4 +1,5 @@
 import pandas as pd
+from pathlib import Path
 
 def file_preprocessing(df:pd.DataFrame)->pd.DataFrame:
     # df=dataframe_creation()
@@ -49,5 +50,6 @@ def file_preprocessing(df:pd.DataFrame)->pd.DataFrame:
     df['Absent_date']=df[date_columns].applymap(lambda x: 'PL' in x).dot(df[date_columns].columns + ',').str[:-1] + ',' + df[date_columns].applymap(lambda x: 'UL' in x).dot(df[date_columns].columns + ',').str[:-1] + df[date_columns].applymap(lambda x: 'SL' in x).dot(df[date_columns].columns + ',').str[:-1]
     df['Absent_date']=df['Absent_date'].str.lstrip(',')
     df['Absent_date']=df['Absent_date'].str.rstrip(',')
-    df.to_excel(r'C:\Users\Admin\Downloads\df1_file.xlsx',index=False)
+    df_path=str(Path.home() / "Downloads" /"df_file.xlsx")
+    df.to_excel(df_path,index=False)
     return df
